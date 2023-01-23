@@ -1,7 +1,11 @@
 from random import randint
 
 
+from graphic_arts.start_game_banner import run_screensaver
+
+
 def attack(char_name: str, char_class: str) -> str:
+    """Возвращает значение нанесённого урона."""
     if char_class == 'warrior':
         return (f'{char_name} нанёс противнику урон равный '
                 f'{5 + randint(3, 5)}')
@@ -15,6 +19,7 @@ def attack(char_name: str, char_class: str) -> str:
 
 
 def defence(char_name: str, char_class: str) -> str:
+    """Возвращает значение блокированного урона."""
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} ед. урона')
     if char_class == 'mage':
@@ -25,6 +30,7 @@ def defence(char_name: str, char_class: str) -> str:
 
 
 def special(char_name: str, char_class: str) -> str:
+    """Возвращает значение применённого специального умения."""
     if char_class == 'warrior':
         return (f'{char_name} применил специальное умение '
                 f'«Выносливость {80 + 25}»')
@@ -36,6 +42,9 @@ def special(char_name: str, char_class: str) -> str:
 
 
 def start_training(char_name: str, char_class: str) -> str:
+    """Выводит название выбранного для персонажа класса.
+    Запускает тренировку.
+    """
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     if char_class == 'mage':
@@ -48,6 +57,7 @@ def start_training(char_name: str, char_class: str) -> str:
           'или special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
     cmd: str = None
+    """Выводит на печать выбранную команду и заканчивает тренировку."""
     while cmd != 'skip':
         cmd = input('Введи команду: ')
         if cmd == 'attack':
@@ -60,6 +70,7 @@ def start_training(char_name: str, char_class: str) -> str:
 
 
 def choice_char_class() -> str:
+    """Выводит подтверждённый игроком, при выборе, класс персонажа."""
     approve_choice: str = ''
     char_class: str = ''
     while approve_choice != 'y':
@@ -77,11 +88,13 @@ def choice_char_class() -> str:
                   'Черпает силы из природы, веры и духов')
         approve_choice = input('Нажми (Y), чтобы подтвердить выбор '
                                'или любую другую кнопку, '
-                               'чтобы выбрать другого персонажа').lower()
+                               'чтобы выбрать другого персонажа: ').lower()
     return char_class
 
 
-def main():
+if __name__ == '__main__':
+    """Запускает программу."""
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = input('...назови себя: ')
@@ -91,6 +104,3 @@ def main():
     print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
-
-
-main()
